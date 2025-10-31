@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/inggatec/barbosaecruz',
+  basePath: '/barbosaecruz',
   supportedLocales: {
   "en-US": ""
 },
