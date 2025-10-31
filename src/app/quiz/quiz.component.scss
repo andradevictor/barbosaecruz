@@ -1,0 +1,46 @@
+.quiz-container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fdfbfb, #ebedee);
+    padding: 2rem;
+}
+
+.quiz-card {
+    max-width: 440px;
+    width: 100%;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 10px;
+}
+
+.question-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+button[mat-raised-button] {
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: transform 0.15s ease;
+}
+
+button[mat-raised-button]:hover {
+    transform: scale(1.05);
+}
+
+.end-card {
+    background: #f1f8e9;
+}
+
+.slide-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+}
