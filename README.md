@@ -59,5 +59,5 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 ```bash
-ng build --output-path docs --base-href /inggatec/barbosaecruz
+ng build --output-path docs --base-href /barbosaecruz/
 ```s
