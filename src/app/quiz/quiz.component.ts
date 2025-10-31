@@ -15,7 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 interface Option {
   text: string;
-  next?: number; // índice da próxima pergunta (ou conclusão)
+  next?: number;
 }
 
 interface Question {
@@ -111,15 +111,13 @@ interface Question {
   ]
 })
 export class QuizComponent {
-  // índice atual (coincide com `index` do question)
   currentIndex = 1;
   answered = false;
 
-  // controle simples de progresso (número aproximado de passos relevantes)
-  maxSteps = 6;
-  path: number[] = [1]; // histórico de índices visitados
 
-  // --- perguntas / conclusões mapeadas a partir do seu excalidraw (ajustadas) ---
+  maxSteps = 6;
+  path: number[] = [1];
+
   questions: Question[] = [
     {
       index: 1,
@@ -127,7 +125,7 @@ export class QuizComponent {
       image: this.icon('question'),
       options: [
         { text: 'Sim', next: 2 },
-        { text: 'Não', next: 4 } // segue para fluxo de investigação / fixação
+        { text: 'Não', next: 4 }
       ]
     },
 
@@ -145,7 +143,7 @@ export class QuizComponent {
       index: 3,
       text: 'Conclusão: Cobrança dos atrasados e medidas (intimação, bloqueio, possibilidade de prisão civil).',
       image: this.icon('law'),
-      options: [], // nó de conclusão
+      options: [],
       isConclusion: true
     },
 
@@ -165,7 +163,7 @@ export class QuizComponent {
       image: this.icon('scale'),
       options: [
         { text: 'Sim, está muito baixo', next: 7 },
-        { text: 'Não, o valor é justo', next: 3 } // encaminha para cobrança dos atrasados (ou conclusão)
+        { text: 'Não, o valor é justo', next: 3 }
       ]
     },
 
@@ -247,35 +245,28 @@ export class QuizComponent {
     }
   ];
 
-  // helper: localizar pergunta atual por `index`
   get currentQuestion(): Question {
     const q = this.questions.find((x) => x.index === this.currentIndex);
-    // fallback para evitar undefined
     return q ?? { index: -1, text: 'Fluxo não encontrado', options: [], image: this.icon('question'), isConclusion: true };
   }
 
-  // progresso simples: baseado no comprimento do caminho / maxSteps
   get progressValue() {
     const p = Math.min(100, Math.round((this.path.length / this.maxSteps) * 100));
     return p;
   }
 
-  // Seleção de opção: vai para option.next (se houver) e registra o caminho
   selectOption(option: Option) {
     if (!option?.next) return;
 
     this.answered = true;
 
-    // animação / bloqueio curto para sensação de resposta
     setTimeout(() => {
       this.answered = false;
 
       this.currentIndex = option.next!;
       this.path.push(this.currentIndex);
 
-      // se for conclusão terminal, podemos ajustar maxSteps para refletir (opcional)
       if (this.currentQuestion.isConclusion) {
-        // curta lógica: manter o progresso como completo
         this.path.push(this.currentIndex);
       }
     }, 380);
@@ -287,10 +278,7 @@ export class QuizComponent {
     this.answered = false;
   }
 
-  // pequenas músicas/sons ou confete podem ser adicionados (opcional)
-  // --------- helper de ícones (retorna URLs públicas) ----------
   private icon(kind: string): string {
-    // URLs públicas usadas no exemplo — substitua pelos seus SVGs ou assets locais
     const icons: Record<string, string> = {
       question: 'https://cdn-icons-png.flaticon.com/512/159/159604.png',
       check: 'https://cdn-icons-png.flaticon.com/512/190/190411.png',
